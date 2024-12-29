@@ -30,11 +30,11 @@ function App() {
         setTask(task.map((t) => t.id === id ? {...t, isDone: !t.isDone} : t));
     }
 
-    const oncahgeHundler = (e: ChangeEvent<HTMLInputElement>) => {
+    const addTaskHundler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTask(e.currentTarget.value)
 
     }
-    const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const onKeyDownAddTaskHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && newTask.trim() !== '') {
             const newTask: TaskType = {
                 id: v1(),
@@ -49,9 +49,9 @@ function App() {
         return (
             <div className="App">
                 <input type={'text'}
-                       onChange={oncahgeHundler}
+                       onChange={addTaskHundler}
                        value={newTask}
-                       onKeyUp={onKeyDownHandler}
+                       onKeyUp={onKeyDownAddTaskHandler}
                        placeholder='Add a task'
                 />
                 <ul>
