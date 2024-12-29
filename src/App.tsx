@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 import './App.css';
+import {v1} from 'uuid';
 
 type TaskType = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 }
@@ -11,32 +12,61 @@ type TaskType = {
 function App() {
 
     const [task, setTask] = useState<TaskType[]>([
-        {id: 1, title: 'Task 1', isDone: false},
-        {id: 2, title: 'Task 2', isDone: false},
-        {id: 3, title: 'Task 3', isDone: false},
-        {id: 4, title: 'Task 4', isDone: false},
-        {id: 5, title: 'Task 5', isDone: false},
-        {id: 6, title: 'Task 6', isDone: false}
+        {id: v1(), title: 'Task 1', isDone: false},
+        {id: v1(), title: 'Task 2', isDone: false},
+        {id: v1(), title: 'Task 3', isDone: false},
+        {id: v1(), title: 'Task 4', isDone: false},
+        {id: v1(), title: 'Task 5', isDone: false},
+        {id: v1(), title: 'Task 6', isDone: false}
     ])
 
-    const removeHundler = (id: number) => {
+    const [newTask, setNewTask] = useState<string>('')
+
+    const removeHundler = (id: string) => {
         setTask(task.filter((t) => t.id !== id));
     }
 
-    const checkedHundler = (id: number) => {
-        setTask(task.map((t) => t.id === id? {...t, isDone: !t.isDone} : t));
+    const checkedHundler = (id: string) => {
+        setTask(task.map((t) => t.id === id ? {...t, isDone: !t.isDone} : t));
     }
 
-  return (
-    <div className="App">
-      <ul>
-          {task.map((task: TaskType) => (
-              <li style={{listStyle: 'none'}} key={task.id}>{task.title} <input type={'checkbox'} checked={task.isDone} onClick={()=>checkedHundler(task.id)}/><button onClick={()=>removeHundler(task.id)}>remove</button></li>
+    const oncahgeHundler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewTask(e.currentTarget.value)
 
-          ))}
-      </ul>
-    </div>
-  );
-}
+    }
+    const onKeyDownHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && newTask.trim() !== '') {
+            const newTask: TaskType = {
+                id: v1(),
+                title: e.currentTarget.value,
+                isDone: false,
+            }
+            setTask([newTask, ...task]);
+            setNewTask('')
+        }
+    }
 
-export default App;
+        return (
+            <div className="App">
+                <input type={'text'}
+                       onChange={oncahgeHundler}
+                       value={newTask}
+                       onKeyUp={onKeyDownHandler}
+                       placeholder='Add a task'
+                />
+                <ul>
+                    {task.map((task: TaskType) => (
+                        <li style={{listStyle: 'none'}} key={task.id}>{task.title} <input type={'checkbox'}
+                                                                                          checked={task.isDone}
+                                                                                          onChange={() => checkedHundler(task.id)}/>
+                            <button onClick={() => removeHundler(task.id)}>remove</button>
+                        </li>
+
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+
+
+    export default App;
