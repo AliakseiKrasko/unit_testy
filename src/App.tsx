@@ -11,6 +11,7 @@ type TaskType = {
 
 function App() {
 
+
     const [task, setTask] = useState<TaskType[]>([
         {id: v1(), title: 'Task 1', isDone: false},
         {id: v1(), title: 'Task 2', isDone: false},
@@ -20,7 +21,8 @@ function App() {
         {id: v1(), title: 'Task 6', isDone: false}
     ])
 
-    const [newTask, setNewTask] = useState<string>('')
+    const [newTask, setNewTask] = useState<string>('');
+    const [isAccordionOpen, setAccordionOpen] = useState<boolean>(false);
 
     const removeHundler = (id: string) => {
         setTask(task.filter((t) => t.id !== id));
@@ -46,6 +48,10 @@ function App() {
         }
     }
 
+    const accordionHundler = () => {
+        setAccordionOpen(!isAccordionOpen);
+    }
+
         return (
             <div className="App">
                 <input type={'text'}
@@ -64,6 +70,10 @@ function App() {
 
                     ))}
                 </ul>
+                <h1 style={{cursor: 'pointer'}} onClick={accordionHundler}>MyPhoto</h1>
+                    {isAccordionOpen  && (
+                        <img src={"https://i.pinimg.com/236x/61/d4/78/61d478e69294a5594514e0b22cf670ab.jpg"} />
+                        )}
             </div>
         );
     }
