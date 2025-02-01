@@ -6,6 +6,7 @@ import {Counter} from './components/Counter';
 import {Array} from './components/Array';
 import {WrapperComponent} from './components/WrapperComponent';
 import TextComponent from './components/TextComponent';
+import {Address} from './components/Address';
 
 type TaskType = {
     id: string;
@@ -58,7 +59,7 @@ function App() {
 
         return (
             <div className="App">
-                <WrapperComponent child={<TextComponent />} />
+                <Address name={"Alex"} address={''}/>
                 <Array />
                 <Counter />
                 <input type={'text'}
