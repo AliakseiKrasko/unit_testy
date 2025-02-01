@@ -2,8 +2,10 @@ import React, {ChangeEvent, useState} from 'react';
 
 import './App.css';
 import {v1} from 'uuid';
-import {Counter} from './Counter';
-import {Array} from './Array';
+import {Counter} from './components/Counter';
+import {Array} from './components/Array';
+import {WrapperComponent} from './components/WrapperComponent';
+import TextComponent from './components/TextComponent';
 
 type TaskType = {
     id: string;
@@ -56,6 +58,7 @@ function App() {
 
         return (
             <div className="App">
+                <WrapperComponent child={<TextComponent />} />
                 <Array />
                 <Counter />
                 <input type={'text'}
