@@ -8,6 +8,7 @@ import {Address} from './components/Address';
 import {TextComponent} from './components/TextComponent';
 import {Clock} from './components/Clock';
 import {Text} from './components/Text';
+import {Ref} from './components/Ref';
 
 type TaskType = {
     id: string;
@@ -60,12 +61,13 @@ function App() {
 
         return (
             <div className="App">
+                <Ref />
                 <Text/>
                 <Clock />
-                <TextComponent />
+                {/*<TextComponent />*/}
                 {/*<Address name={"Alex"} address={''}/>*/}
-                <Array />
-                <Counter />
+                {/*<Array />*/}
+                {/*<Counter />*/}
                 <input type={'text'}
                        onChange={addTaskHundler}
                        value={newTask}
