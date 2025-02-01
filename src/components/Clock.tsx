@@ -12,19 +12,24 @@ export const Clock = (props: Props) => {
         return () => clearInterval(timerId);
     }, []);
 
-    const ruDate = time.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })
+
+    const ruDate = time.toLocaleString('ru-RU', {timeZone: 'Europe/Moscow'})
     const ruTime = new Date(ruDate);
 
-    const hours = ruTime.getHours();
-    const minutes = ruTime.getMinutes();
-    const seconds = ruTime.getSeconds();
+    const hoursRu = ruTime.getHours();
+    const minutesRu = ruTime.getMinutes();
+    const secondsRu = ruTime.getSeconds();
+
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
+    const seconds = time.getSeconds();
 
     const formatDate = (num: number) => (num < 10 ? `0${num}` : num)
 
     return (
         <div>
-            <span>{formatDate(hours)}:{formatDate(minutes)}:{formatDate(seconds)}</span>
-
+            <div>{formatDate(hours)}:{formatDate(minutes)}:{formatDate(seconds)} - Local time</div>
+            <div>{formatDate(hoursRu)}:{formatDate(minutesRu)}:{formatDate(secondsRu)} - Minsk time</div>
         </div>
     );
 };
