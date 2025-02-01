@@ -7,6 +7,7 @@ import {Array} from './components/Array';
 import {Address} from './components/Address';
 import {TextComponent} from './components/TextComponent';
 import {Clock} from './components/Clock';
+import {Text} from './components/Text';
 
 type TaskType = {
     id: string;
@@ -59,6 +60,7 @@ function App() {
 
         return (
             <div className="App">
+                <Text/>
                 <Clock />
                 <TextComponent />
                 {/*<Address name={"Alex"} address={''}/>*/}
