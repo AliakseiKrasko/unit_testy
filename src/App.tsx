@@ -3,6 +3,7 @@ import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import {v1} from 'uuid';
 import {Counter} from './Counter';
+import {Array} from './Array';
 
 type TaskType = {
     id: string;
@@ -55,6 +56,7 @@ function App() {
 
         return (
             <div className="App">
+                <Array />
                 <Counter />
                 <input type={'text'}
                        onChange={addTaskHundler}
